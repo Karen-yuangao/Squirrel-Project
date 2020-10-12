@@ -19,7 +19,7 @@ class Squirrel(models.Model):
          decimal_places = 15,
     )
 
-     Unique_Squirrel_ID= models.CharField(
+     Unique_squirrel_id= models.CharField(
          max_length=100,
          help_text=_('Identification tag for each squirrel sightings'),
          primary_key= True,
