@@ -46,4 +46,4 @@ class Command(BaseCommand):
                     Indifferent = strtobool(r['Indifferent']),
                     Runs_from = strtobool(r['Runs from']),
                 )
-                s.save()
+                squirrel.save()
