@@ -2,7 +2,6 @@ from django.db import models
 
 from django.utils.translation import gettext as _
 
-
 class Squirrel(models.Model):
      X = models.DecimalField(
          max_length=50,
