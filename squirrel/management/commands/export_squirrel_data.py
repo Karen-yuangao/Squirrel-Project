@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         fields = Squirrel._meta.fields
-        with open(args[0], 'w') as file:
+        with open(options['file'], 'w') as file:
             writer = csv.writer(file)
             for i in Squirrel.objects.all():
                 row = [getattr(i, field.name) for field in fields]
