@@ -25,14 +25,14 @@ class Squirrel(models.Model):
          primary_key= True,
     )
 
-     AM='AM'
-     PM='PM'
+     AM ='AM'
+     PM ='PM'
      SHIFT_CHOICES =(
             (AM,'AM'),
             (PM,'PM'),
     )
 
-     Shift  = models.CharField(
+     Shift = models.CharField(
          max_length=100,
          choices = SHIFT_CHOICES,
          help_text=_('Squirrel sighting session occured in morning or afternoon'),
@@ -65,7 +65,7 @@ class Squirrel(models.Model):
             (BLACK,'Black'),
     )
 
-     Primary_Fur_Color = models.CharField(
+     Primary_fur_color = models.CharField(
             max_length=10,
             blank=True,
             choices= COLOR_CHOICES,
@@ -86,7 +86,7 @@ class Squirrel(models.Model):
             help_text=_('Where the squirrel was when first sighted'),
     )
 
-     Specific_Location = models.CharField(
+     Specific_location = models.CharField(
             max_length=200,
             blank=True,
             help_text=_('Sighters occasional comment on the squirrel location'),
@@ -159,7 +159,7 @@ class Squirrel(models.Model):
             default = False,
     )
 
-     Runs_From = models.BooleanField(
+     Runs_from = models.BooleanField(
             help_text=_('Squirrel was seen running from humans'),
             default= False,
     )

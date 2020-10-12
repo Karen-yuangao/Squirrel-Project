@@ -28,7 +28,7 @@ class Command(BaseCommand):
                     Date=datetime.date(
                         int(r['Date'][-4:]), int(r['Date'][:2]), int(r['Date'][2:4])),
                     Age = r['Age'],
-                    Primary_Fur_Color = r['Primary Fur Color'],
+                    Primary_fur_color = r['Primary Fur Color'],
                     Location = r['Location'],
                     Specific_location=r['Specific Location'],
                     Running = strtobool(r['Running']),
@@ -44,6 +44,6 @@ class Command(BaseCommand):
                     Tail_twitches = strtobool(r['Tail twitches']),
                     Approaches = strtobool(r['Approaches']),
                     Indifferent = strtobool(r['Indifferent']),
-                    Runs_From = strtobool(r['Runs from']),
+                    Runs_from = strtobool(r['Runs from']),
                 )
                 s.save()
