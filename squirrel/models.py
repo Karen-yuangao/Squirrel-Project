@@ -140,12 +140,12 @@ class Squirrel(models.Model):
     )
 
      Tail_flags = models.BooleanField(
-            help_text=_('Squirrel was seen flagging its tail'),
+            help_text=_('Squirrel was seen flagging tail'),
             default = False,
     )
 
      Tail_twitches = models.BooleanField(
-            help_text=_('Squirrel was seen twitching its tail'),
+            help_text=_('Squirrel was seen twitching tail'),
             default= False,
     )
 
