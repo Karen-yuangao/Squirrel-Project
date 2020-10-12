@@ -39,7 +39,7 @@ class Squirrel(models.Model):
          blank = True,
     )
 
-     Date = models.IntegerField(
+     Date = models.DateField(
          help_text=_('Session of sighting day and month'),
     )
 
