@@ -8,13 +8,13 @@ class Command(BaseCommand):
     help = 'Export data in CVS file'
 
     def add_arguments(self, parser):
-        parser.add_argument('args', narg = '*', type=str)
+        parser.add_argument('exported_csv_file')
 
     def handle(self, *args, **kwargs):
-        with open(args[0], 'w') as file:
-            writer = csv.writer(file)
+        with open(kwargs['exported_csv_file'], 'w') as f:
+            writer = csv.writer(f)
             fields = Squirrel._meta.fields
             for i in Squirrel.objects.all():
                 r = [getattr(i, field.name) for field in fields]
                 writer.writerow(r)
-            file.close()
+            f.close()
