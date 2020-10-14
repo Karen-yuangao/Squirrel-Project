@@ -60,3 +60,18 @@ def sightingsforupdate(request,uniqueSquirrelID,param):
     context = {'profile': model_to_dict(profile)}
     return render(request,'unique_sighting.html',context)
 
+def stats(request):
+    fields = {}
+    #all_fields = SquirrelCens._meta.get_fields()
+    #myValues = SquirrelCens.objects.values(all_fields[0])[0:2]
+    items = SquirrelCens.objects.all()
+    random_items = random.sample(items, 5)
+    random_item = random.choice(items)
+    print(random_item)
+    #for field in sorted(options.concrete_fields + options.many_to_many + options.virtual_fields):
+    #  fields[field.name] = field
+    context={'test':1111}
+    return render(request,'unique_sighting.html',context)
+
+
+
