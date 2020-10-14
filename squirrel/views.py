@@ -53,3 +53,10 @@ def doadd(request):
         context ={}
         context["squirrel_profile"] = SquirrelCens.objects.all() 
         return render(request,'sightings.html', context)
+
+def sightingsforupdate(request,uniqueSquirrelID,param):
+    print('param:',uniqueSquirrelID,param)
+    profile = SquirrelCens.objects.get(unique_squirrel_id=uniqueSquirrelID)
+    context = {'profile': model_to_dict(profile)}
+    return render(request,'unique_sighting.html',context)
+
