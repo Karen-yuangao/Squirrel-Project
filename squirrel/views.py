@@ -5,6 +5,10 @@ from django.forms.models import model_to_dict
 from django.core import serializers
 import random
 from json import dumps
+from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseNotFound
+
+
 
 def map(request):
     positions = SquirrelCens.objects.all()[0:100]
