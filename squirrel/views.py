@@ -75,3 +75,20 @@ def stats(request):
 
 
 
+def doUpdate(request):
+    if request.method == "POST":
+        latitude = request.POST.get('latitude',None)
+        longitude = request.POST.get('longitude',None)
+        unique_squirrel_id = request.POST.get('unique_squirrel_id',None)
+        shift = request.POST.get('shift',None)
+        date = request.POST.get('date',None)
+        age = request.POST.get('age',None)
+        obj, created = SquirrelCens.objects.update_or_create(
+            unique_squirrel_id=unique_squirrel_id,
+            defaults={'latitude':latitude,'longitude':longitude,'shift':shift,'date':date,'age':age},
+        )
+    print(obj,created)
+    context ={}
+    context["squirrel_profile"] = SquirrelCens.objects.all() 
+    return render(request,'sightings.html', context)
+
