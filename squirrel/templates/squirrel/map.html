@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
+    <style>
+        body {
+            background: rgb(73, 234, 188);
+        }
+        .container {
+            background-color: white;
+            width: 42rem;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 1.4rem;
+            box-shadow: 1px 5px 5px 0 rgba(0, 0, 0, 0.20);
+            border-radius: 0.2rem;
+            box-sizing: border-box;
+        }
+        .container * {
+            box-sizing: inherit;
+            font-size: inherit;
+        }
+        .container #MapBox {
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="MapBox" style="width:40rem;height:40rem"></div>
+</div>
+<script>
+var mapData = JSON.parse("{{data|escapejs}}");
+	var list = eval(mapData);
+
+	var map = new L.map('MapBox',{
+	center:[Number(-73.95746481) ,Number(40.74)],
+	zoom:9,
+	crs:L.CRS.EPSG4326
+	});
+	
+    var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    map.addLayer(layer);     
+	
+	var markers = []
+	for(var i=0;i<10;i++){
+		 var data = L.marker([Number(list[i].fields.latitude),Number(list[i].fields.longitude)],{
+			  id:""+i
+		})
+		
+		Object.defineProperties(data, {
+		  'id': {
+			value: "ddd"+i,
+			writable: true
+		  },
+		});
+		markers.push(data)
+	}
+	var layerGroup = L.layerGroup(markers);
+	layerGroup.addTo(map);	
+</script>
+</body>
+

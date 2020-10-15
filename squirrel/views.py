@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from .models import SquirrelCens
+from .models import Squirrel
 from django.forms.models import model_to_dict
 from django.core import serializers
 import random
@@ -11,7 +11,7 @@ from django.http import HttpResponseNotFound
 
 
 def map(request):
-    positions = SquirrelCens.objects.all()[0:100]
+    positions = Squirrel.objects.all()[0:100]
     #print(positions[:])
     mapdata = dumps(serializers.serialize("json",list(positions), fields=('latitude', 'longitude')))
     #print(mapdata)
@@ -23,13 +23,13 @@ def add(request):
 
 def sightings(request):
     context ={} 
-    context["squirrel_profile"] = SquirrelCens.objects.all() 
+    context["squirrel_profile"] = Squirrel.objects.all() 
     return render(request,'sightings.html',context)
 
     
 def doadd(request):
     if request.method == "POST":
-        SquirrelCens.objects.create(
+        Squirrel.objects.create(
             latitude = request.POST.get('latitude',None),
             longitude = request.POST.get('longitude',None),
             unique_squirrel_id = request.POST.get('unique_squirrel_id',None),
@@ -55,20 +55,20 @@ def doadd(request):
             runs_from = request.POST.get('runs_from',None)
 		)
         context ={}
-        context["squirrel_profile"] = SquirrelCens.objects.all() 
+        context["squirrel_profile"] = Squirrel.objects.all() 
         return render(request,'sightings.html', context)
 
 def sightingsforupdate(request,uniqueSquirrelID,param):
     print('param:',uniqueSquirrelID,param)
-    profile = SquirrelCens.objects.get(unique_squirrel_id=uniqueSquirrelID)
+    profile = Squirrel.objects.get(unique_squirrel_id=uniqueSquirrelID)
     context = {'profile': model_to_dict(profile)}
     return render(request,'unique_sighting.html',context)
 
 def stats(request):
     fields = {}
-    #all_fields = SquirrelCens._meta.get_fields()
-    #myValues = SquirrelCens.objects.values(all_fields[0])[0:2]
-    items = SquirrelCens.objects.all()
+    #all_fields = Squirrel._meta.get_fields()
+    #myValues = Squirrel.objects.values(all_fields[0])[0:2]
+    items = Squirrel.objects.all()
     random_items = random.sample(items, 5)
     random_item = random.choice(items)
     print(random_item)
@@ -87,12 +87,12 @@ def doUpdate(request):
         shift = request.POST.get('shift',None)
         date = request.POST.get('date',None)
         age = request.POST.get('age',None)
-        obj, created = SquirrelCens.objects.update_or_create(
-            unique_squirrel_id=unique_squirrel_id,
-            defaults={'latitude':latitude,'longitude':longitude,'shift':shift,'date':date,'age':age},
+        obj, created = Squirrel.objects.update_or_create(
+            unique_squirrel_id = unique_squirrel_id,
+            defaults = {'latitude':latitude,'longitude':longitude,'shift':shift,'date':date,'age':age},
         )
     print(obj,created)
-    context ={}
-    context["squirrel_profile"] = SquirrelCens.objects.all() 
+    context = {}
+    context["squirrel_profile"] = Squirrel.objects.all() 
     return render(request,'sightings.html', context)
 

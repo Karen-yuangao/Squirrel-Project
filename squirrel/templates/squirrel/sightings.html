@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <center>
+    <h1>all sightings</h2>
+    <div style="display:block;font-size:16px;margin-left:310px;"><a href="/sightings/add/">add new</a></div>
+    <table border=1>
+        <tr>
+             <th>Unique Squirrel ID</th>
+             <th>Date</th>
+             <th>Link to sighting</th>
+       </tr>
+       {% for profile in squirrel_profile %} 
+       <tr>
+        	<td>{{ profile.unique_squirrel_id }}</td>
+	        <td>{{ profile.date }}</td>
+         	<td><a href="">{{ profile.age }}</a></td>
+       </tr>
+       {% endfor %} 
+    </table>
+    </center>
+    </body>
+</html>

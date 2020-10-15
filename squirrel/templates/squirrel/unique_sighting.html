@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+<center>
+<h1>update sightings</h2>
+<form action="/doupdate/" method="post">
+<label style="display:inline-block;width:160px;text-align:right;font-weight:bold;">Latitude:</label><input type="text" name="latitude" value="{{ profile.latitude }}"><br>
+<label style="display:inline-block;width:160px;text-align:right;font-weight:bold;">Longitude:</label><input type="text" name="longitude" value="{{ profile.longitude }}"><br>
+<label style="display:inline-block;width:160px;text-align:right;font-weight:bold;">Unique Squirrel ID:</label><input type="text" name="unique_squirrel_id" value="{{ profile.unique_squirrel_id }}" readonly><br>
+<label style="display:inline-block;width:160px;text-align:right;font-weight:bold;">Shift:</label><input type="text" name="shift" value="{{ profile.shift }}"><br>
+<label style="display:inline-block;width:160px;text-align:right;font-weight:bold;">Date:</label><input type="text" name="date" value="{{ profile.date }}"><br>
+<label style="display:inline-block;width:160px;text-align:right;font-weight:bold;">Age:</label><input type="text" name="age" value="{{ profile.age }}"><br><br>
+<span style="display:inline-block;width:160px;"></span><input type="submit" value="Update" style="width:60px;height:30px;">
+</form>
+</center>
+</body>
+</html>
