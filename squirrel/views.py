@@ -80,6 +80,7 @@ def stats(request):
             'sightings_cinnamon': sightings_cinnamon,
 	    'sightings_black': sightings_black,
             'sightings_ground_plane':sightings_ground_plane,
+	    'sightings_above_ground':sightings_above_ground ,
             'chasing_true': chasing_true,
             'chasing_false': chasing_false,
             'climbing_true': climbing_true,
