@@ -9,21 +9,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound
 
 
-
 def map(request):
     sightings = Squirrel.objects.all()[0:100]
     context = {'sightings': sightings}
     return render(request,'map.html',context)
-    
-def add(request):
-    return render(request,'add.html')
-
+  
 def sightings(request):
     context ={} 
     context["squirrel_profile"] = Squirrel.objects.all() 
     return render(request,'sightings.html',context)
 
-    
+def add(request):
+    return render(request,'add.html')
+
 def doadd(request):
     if request.method == "POST":
         Squirrel.objects.create(
@@ -89,8 +87,6 @@ def stats(request):
             'eating_false': eating_false,
             }   
     return render(request,'stats.html',context)
-
-
 
 def doUpdate(request):
     if request.method == "POST":
