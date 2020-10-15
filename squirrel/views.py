@@ -62,17 +62,32 @@ def sightingsforupdate(request,uniqueSquirrelID,param):
     return render(request,'unique_sighting.html',context)
 
 def stats(request):
-    fields = {}
-    #all_fields = Squirrel._meta.get_fields()
-    #myValues = Squirrel.objects.values(all_fields[0])[0:2]
-    items = Squirrel.objects.all()
-    random_items = random.sample(items, 5)
-    random_item = random.choice(items)
-    print(random_item)
-    #for field in sorted(options.concrete_fields + options.many_to_many + options.virtual_fields):
-    #  fields[field.name] = field
-    context={'test':1111}
-    return render(request,'unique_sighting.html',context)
+    sightings_total = Sighting.objects.count()
+    sightings_grey = Sighting.objects.filter(primary_fur_color='GREY').count()
+    sightings_cinnamon = Sighting.objects.filter(primary_fur_color='CINNAMON').count()
+    sightings_black = Sighting.objects.filter(primary_fur_color='BLACK').count()
+    sightings_ground_plane = Sighting.objects.filter(location='GROUND_PLANE').count()
+    sightings_above_ground = Sighting.objects.filter(location='ABOVE_GROUND').count()
+    chasing_true = Sighting.objects.filter(chasing=True).count()
+    chasing_false = Sighting.objects.filter(chasing=False).count()
+    climbing_true = Sighting.objects.filter(climbing=True).count()
+    climbing_false = Sighting.objects.filter(climbing=False).count() 
+    eating_true = Sighting.objects.filter(eating=True).count()
+    eating_false = Sighting.objects.filter(eating=False).count() 
+    context = {
+	    'sightings_total': sightings_total,
+	    'sightings_grey': sightings_grey,
+            'sightings_cinnamon': sightings_cinnamon,
+	    'sightings_black': sightings_black,
+            'sightings_ground_plane':sightings_ground_plane,
+            'chasing_true': chasing_true,
+            'chasing_false': chasing_false,
+            'climbing_true': climbing_true,
+            'climbing_false': climbing_false,
+	    'eating_true':eating_true,
+            'eating_false': eating_false,
+            }   
+    return render(request,'stats.html',context)
 
 
 
