@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 class Squirrel(models.Model):
-     latitude = models.DecimalField(
+     longitude = models.DecimalField(
          max_length=50,
          help_text=_('Longitude Coordinate for Squirrel sighting point'),
          blank = True,
@@ -11,7 +11,7 @@ class Squirrel(models.Model):
          decimal_places = 15,
     )
 
-     longitude = models.DecimalField(
+     latitude = models.DecimalField(
          max_length=50,
          help_text=_('Latitude Coordinate for Squirrel sighting point'),
          blank = True,

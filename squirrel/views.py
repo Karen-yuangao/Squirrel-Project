@@ -11,11 +11,8 @@ from django.http import HttpResponseNotFound
 
 
 def map(request):
-    positions = Squirrel.objects.all()[0:100]
-    #print(positions[:])
-    mapdata = dumps(serializers.serialize("json",list(positions), fields=('latitude', 'longitude')))
-    #print(mapdata)
-    context = {'data': mapdata}
+    sightings = Squirrel.objects.all()[0:100]
+    context = {'sightings': sightings}
     return render(request,'map.html',context)
     
 def add(request):
