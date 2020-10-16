@@ -1,62 +1,71 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from .models import Squirrel
-from django.forms.models import model_to_dict
-from django.core import serializers
-import random
-from json import dumps
 from django.http import HttpResponse, HttpResponseRedirect
-from django.http import HttpResponseNotFound
+from .models import Squirrel
+from .forms import SquirrelForm
+from django.db.models import Count
+
+
+def update(request,unique_squirrel_id):
+    squirrel = Squirrel.objects.get(unique_squirrel_id=unique_squirrel_id)
+    if request.method =='POST':
+        form = SquirrelForm(request.POST, instance = squirrel)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/sightings')
+    else:
+        form = SquirrelForm(instance=squirrel)
+
+    context ={
+            'form':form,
+             }
+    return render(request, 'squirrel/update.html', context)
 
 def map(request):
     sightings = Squirrel.objects.all()[:100]
     context = {
             'sightings': sightings
     }
-    return render(request,'map.html',context)
+    return render(request,'squirrel/map.html',context)
 
 #add new sightings of squirrel locate on the sighting page and will direct to add page(in 'form')
 def add(request):
      if request.method == "POST":
-        form= SquirrelForm(request.POST)
+        form = SquirrelForm(request.POST)
         if form.is_valid():
+            ID = form['unique_squirrel_id'].value()
             form.save()
             return redirect(f'/sightings')
      else:
-        form = SquirrelForm()
-        context ={
-              'form':form,
-        }
-    return render(request,'add.html',context)
+         form = SquirrelForm()
+         context ={
+                 'form':form,
+         }
+     return render(request,'squirrel/add.html',context)
+
 
 #first page with Unique Squirrel ID, Date, and Link to unique squirrel sighting
 def sightings(request):
-    squirrel = Squirrel.objects.all()
+    squirrels= Squirrel.objects.all()
     context = {
-            'squirrels': squirrel,
+            'squirrels': squirrels,
     }
-    return render(request, 'sightings.html',context)
+    return render(request, 'squirrel/sightings.html',context)
 
-#probablity need a form for this update part
-def sightingsforupdate(request,uniqueSquirrelID,param):
-    print('param:',uniqueSquirrelID,param)
-    profile = Squirrel.objects.get(unique_squirrel_id=uniqueSquirrelID)
-    context = {'profile': model_to_dict(profile)}
-    return render(request,'unique_sighting.html',context)
 
 def stats(request):
-    sightings_total = Sighting.objects.count()
-    sightings_grey = Sighting.objects.filter(primary_fur_color='GREY').count()
-    sightings_cinnamon = Sighting.objects.filter(primary_fur_color='CINNAMON').count()
-    sightings_black = Sighting.objects.filter(primary_fur_color='BLACK').count()
-    sightings_ground_plane = Sighting.objects.filter(location='GROUND_PLANE').count()
-    sightings_above_ground = Sighting.objects.filter(location='ABOVE_GROUND').count()
-    chasing_true = Sighting.objects.filter(chasing=True).count()
-    chasing_false = Sighting.objects.filter(chasing=False).count()
-    climbing_true = Sighting.objects.filter(climbing=True).count()
-    climbing_false = Sighting.objects.filter(climbing=False).count() 
-    eating_true = Sighting.objects.filter(eating=True).count()
-    eating_false = Sighting.objects.filter(eating=False).count() 
+    sightings_total = Squirrel.objects.count()
+    sightings_grey = Squirrel.objects.filter(primary_fur_color='Gray').count()
+    sightings_cinnamon = Squirrel.objects.filter(primary_fur_color='Cinnamon').count()
+    sightings_black = Squirrel.objects.filter(primary_fur_color='Black').count()
+    sightings_ground_plane = Squirrel.objects.filter(location='Ground Plane').count()
+    sightings_above_ground = Squirrel.objects.filter(location='Above Ground').count()
+    chasing_true = Squirrel.objects.filter(chasing=True).count()
+    chasing_false = Squirrel.objects.filter(chasing=False).count()
+    climbing_true = Squirrel.objects.filter(climbing=True).count()
+    climbing_false = Squirrel.objects.filter(climbing=False).count() 
+    eating_true = Squirrel.objects.filter(eating=True).count()
+    eating_false = Squirrel.objects.filter(eating=False).count() 
     context = {
 	    'sightings_total': sightings_total,
 	    'sightings_grey': sightings_grey,
@@ -71,4 +80,6 @@ def stats(request):
 	    'eating_true':eating_true,
             'eating_false': eating_false,
             }   
-    return render(request,'stats.html',context)
+    return render(request,'squirrel/stats.html',context)
+
+

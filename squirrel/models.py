@@ -6,17 +6,15 @@ class Squirrel(models.Model):
      longitude = models.DecimalField(
          max_length=50,
          help_text=_('Longitude Coordinate for Squirrel sighting point'),
-         blank = True,
-         max_digits=20,
-         decimal_places = 15,
+         max_digits=25,
+         decimal_places = 20,
     )
 
      latitude = models.DecimalField(
          max_length=50,
          help_text=_('Latitude Coordinate for Squirrel sighting point'),
-         blank = True,
-         max_digits=20,
-         decimal_places = 15,
+         max_digits=25,
+         decimal_places = 20,
     )
 
      unique_squirrel_id= models.CharField(

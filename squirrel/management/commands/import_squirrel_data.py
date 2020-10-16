@@ -16,13 +16,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         path = kwargs['path']
+        Squirrel.objects.all().delete()
 
         with open(path, 'rt') as f:
             reader = csv.DictReader(f)
-            for r in reader:
-                squirrel = Squirrel(
-                    latitude = r['X'],
-                    longitude = r['Y'],
+            Data = list(reader)
+            for r in Data:
+               squirrel=Squirrel.objects.create(
+                    longitude = r['X'],
+                    latitude = r['Y'],
                     unique_squirrel_id = r['Unique Squirrel ID'],
                     shift = r['Shift'],
                     date=datetime.date(
@@ -46,4 +48,5 @@ class Command(BaseCommand):
                     indifferent = strtobool(r['Indifferent']),
                     runs_from = strtobool(r['Runs from']),
                 )
-                squirrel.save()
+            squirrel.save()
+

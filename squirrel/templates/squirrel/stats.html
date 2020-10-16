@@ -24,158 +24,90 @@
 <meta name="theme-color" content="#563d7c">
 
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-	html {
-	  font-size: 14px;
-	}
-	@media (min-width: 768px) {
-	  html {
-		font-size: 16px;
-	  }
-	}
-
-	.container {
-	  max-width: 960px;
-	}
-
-	.pricing-header {
-	  max-width: 700px;
-	}
-
-	.card-deck .card {
-	  min-width: 220px;
-	}
-	  
-    </style>
-  </head>
-  <body>
-
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark default">
-  <a class="navbar-brand">Squirrel Sightings</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'squirrel:all' %}">All</a>
-      </li>      
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'squirrel:add' %}">Add sighting <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'squirrel:stats' %}">Stats</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'squirrel:map' %}">Map</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <h1 class="display-4">Squirrels Statistics Overview</h1>
   <p class="lead">Some matrics for your reference</p>
 </div>
 
 <div class="container">
-{% if has_no_sightings %}
-<p>There are no sightings. Please add one.</p>
-{% else %}
-   <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">General Sightings</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">{{sightings_total}} <small class="text-muted">squirrels</small></h1>
-      </div>
-    </div>
-     
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Fur Color Distribution</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>{{sightings_grey}}  </li>
-          <li>{{sightings_cinnamon}}</li>
-          <li>{{sightings_black}}</li>
-          
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Chasing</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>During sighting</li>
-          <li>Total numbers of squirrel running {{chasing_true}} </li>
-          <li>Total numbers of squirrel not running{{chasing_false}} </li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Eating</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>During sighting</li>
-          <li>Total numbers of squirrel running {{eating_true}} </li>
-          <li>Total numbers of squirrel not running{{eating_false}} </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Sighting Location</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>During sighting,</li>
-          <li>{{sightings_above_ground}} were seen above the ground</li>
-          <li>{{sightings_ground_plane}} were seen on the plane ground</li>
-        </ul>
-      </div>
-    </div>
-          
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Climbing</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>During sighting,</li>
-          <li>Total number of climbing squirrels {{climbing_true}} </li>
-          <li>Total number of squirrels not climbing {{climbing_false}} were not seen climbing</li>
-        </ul>
-      </div>
-    </div>
-
-	
-  </div>
-{% endif %}
-
+    <div class="card-deck mb-3 text-center">
+     <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">General Sightings</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">{{sightings_total}} <small class="text-muted">squirrels</small></h1>
+        </div>
+     </div>
+     <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Fur Color Distribution</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Gray color: {{sightings_grey}}  </li>
+            <li>Cinnamon color: {{sightings_cinnamon}}</li>
+            <li>Black color: {{sightings_black}}</li>
+          </ul>
+        </div>
+     </div>
+     <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Chasing</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>During sighting:</li>
+            <li>Total numbers of squirrel running: {{chasing_true}} </li>
+            <li>Total numbers of squirrel not running: {{chasing_false}} </li>
+          </ul>
+        </div>
+     </div>
 </div>
 
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Eating</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>During sighting:</li>
+            <li>Total numbers of squirrel running {{eating_true}} </li>
+            <li>Total numbers of squirrel not running{{eating_false}} </li>
+          </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+           <h4 class="my-0 font-weight-normal">Sighting Location</h4>
+        </div>
+        <div class="card-body">
+           <ul class="list-unstyled mt-3 mb-4">
+             <li>During sighting:</li>
+             <li>{{sightings_above_ground}} were seen above the ground</li>
+             <li>{{sightings_ground_plane}} were seen on the plane ground</li>
+           </ul>
+        </div>
+    </div>
+
+  <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Climbing</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>During sighting:</li>
+            <li>Total number of climbing squirrels: {{climbing_true}} </li>
+            <li>Total number of squirrels not climbing: {{climbing_false}} were not seen climbing</li>
+          </ul>
+        </div>
+  </div>
+
+</div>
 
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
