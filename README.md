@@ -1,11 +1,16 @@
 # Squirrel-Project
 
--	A description of what has been implemented
--	This only needs to be a paragraph or less of a description. More is welcome but not needed.
+Squirrel Tracker is a Django-based web application that can add, update, and view squirrel data.
 
--	Columbia Baby, Section 1
--	UNIs: [zw2694, yg2772]
+# Description
 
--	A link to the server running your application
+
+# Group Name and Section
+Columbia Baby, Section 1
+
+# List of UNIs
+UNIs: [zw2694, yg2772]
+
+# Link to the server
 -	For example: https://<your project id>.appspot.com/
 
