@@ -11,5 +11,5 @@ Columbia Baby, Section 1
 UNIs: [zw2694, yg2772]
 
 # Link to the server
--	For example: https://<your project id>.appspot.com/
+-	http://35.194.91.55/sightings/
 
